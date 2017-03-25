@@ -1,21 +1,26 @@
+const fs = require('fs');
+const path = require('path');
 const https = require('https');
-const cred = require('./.credentials.js');
+const credentials = require('./.credentials.js');
 
-const data = {
+let data = {
   branch: 'default',
-  modules: {
-    src: {
-      hello: 'console.log("Hello World!");'
-    }
-  }
+  modules: {}
 };
+
+let files = walkSync('./src');
+for(let file of files) {
+  let content = fs.readFileSync(file).toString();
+  let module = file.replace('src/', '').replace('/', '.').replace('.js', '');
+  data.modules[module] = content;
+}
 
 let req = https.request({
   hostname: 'screeps.com',
   port: 443,
   path: '/api/user/code',
   method: 'POST',
-  auth: cred.email + ':' + cred.password,
+  auth: credentials.email + ':' + credentials.password,
   headers: {
     'Content-Type': 'application/json; charset=utf-8'
   }
@@ -23,3 +28,19 @@ let req = https.request({
 
 req.write(JSON.stringify(data));
 req.end();
+
+
+
+// List all files in a directory in Node.js recursively in a synchronous fashion
+function walkSync(dir, filelist = []) {
+  let files = fs.readdirSync(dir);
+  filelist = filelist || [];
+  files.forEach(file => {
+    if (fs.statSync(path.join(dir, file)).isDirectory()) {
+      filelist = walkSync(path.join(dir, file), filelist);
+    } else {
+      filelist.push(path.join(dir, file));
+    }
+  });
+  return filelist;
+};
