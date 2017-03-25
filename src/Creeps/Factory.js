@@ -33,7 +33,7 @@ class Factory {
   showNotifications() {
     if(this.spawn && this.spawn.spawning) {
       this.room.visual.rect(1, 1, 5, 1.5, {opacity: 0.1});
-      this.room.visual.text('🛠️ ' + this.spawn.spawning.name + ' (' + this.spawn.spawning.remainingTime / this.spawn.spawning.needTime + ')', 2, 2, {opacity: 0.8});
+      this.room.visual.text('🛠️ ' + this.spawn.spawning.name + ' (' + (1 - this.spawn.spawning.remainingTime / this.spawn.spawning.needTime).toFixed(1) + ')', 2, 2, {opacity: 0.8});
     }
   }
 }
