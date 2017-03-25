@@ -14,7 +14,7 @@ class Warrior extends Role {
   }
 
   static run() {
-    //Warrior.spawn(Warrior.LV3);
+    Warrior.spawn(Warrior.LV3);
     for(let creepName of Memory.warriors) {
       Warrior.execute(creepName);
     }
@@ -40,6 +40,6 @@ class Warrior extends Role {
 }
 
 Warrior.LV3 = [MOVE, MOVE, MOVE, ATTACK, ATTACK, TOUGH, TOUGH];
-Warrior.max = 3;
+Warrior.max = 1;
 
 module.exports = Warrior
