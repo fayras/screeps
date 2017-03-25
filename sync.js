@@ -11,7 +11,7 @@ let data = {
 let files = walkSync('./src');
 for(let file of files) {
   let content = fs.readFileSync(file).toString();
-  let module = file.replace('src/', '').replace('/', '.').replace('.js', '');
+  let module = file.replace('src/', '').replace(/\//g, '.').replace('.js', '');
   data.modules[module] = content;
 }
 
