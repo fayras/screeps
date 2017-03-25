@@ -1,0 +1,12 @@
+{
+  "name": "screeps",
+  "version": "0.0.1",
+  "description": "Scripts for the game screeps",
+  "main": "index.js",
+  "private": true,
+  "author": "fayras",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
