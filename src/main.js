@@ -23,12 +23,8 @@ module.exports.loop = function () {
   }
 
   if(Game.spawns.first.spawning) {
-    Game.spawns.first.room.visual.text(
-      '🛠️ ' + Game.spawns.first.spawning.name,
-      Game.spawns.first.pos.x + 1,
-      Game.spawns.first.pos.y,
-      {align: 'left', opacity: 0.8}
-    );
+    Game.spawns.first.room.visual.rect(1, 1, 5, 1.5, {opacity: 0.1});
+    Game.spawns.first.room.visual.text('🛠️ ' + Game.spawns.first.spawning.name + ' (' + Game.spawns.first.spawning.remainingTime / Game.spawns.first.spawning.needTime + ')', 2, 2, {opacity: 0.8});
   }
 
   Builder.run();

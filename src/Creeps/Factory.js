@@ -13,6 +13,7 @@ class Factory {
         this.spawn = Game.spawns[spawnName];
       }
     }
+    this.showNotifications();
   }
 
   create(pType) {
@@ -26,6 +27,13 @@ class Factory {
       if(level.length !== 0) {
         let name = this.spawn.createCreep(level, undefined, {role: pType});
       }
+    }
+  }
+
+  showNotifications() {
+    if(this.spawn && this.spawn.spawning) {
+      this.room.visual.rect(1, 1, 5, 1.5, {opacity: 0.1});
+      this.room.visual.text('🛠️ ' + this.spawn.spawning.name + ' (' + this.spawn.spawning.remainingTime / this.spawn.spawning.needTime + ')', 2, 2, {opacity: 0.8});
     }
   }
 }
